@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import "tw-animate-css";
 
 /* Removed: CSS @plugin is not valid syntax for Tailwind plugins.
    To use 'tailwindcss-animate', configure it in your Tailwind config file (e.g. tailwind.config.js):
