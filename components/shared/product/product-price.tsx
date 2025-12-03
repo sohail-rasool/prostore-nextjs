@@ -4,11 +4,13 @@ const ProductPrice = ({
   value,
   className,
 }: {
-  value: number;
+  value: number | string; // allow string
   className?: string;
 }) => {
   // Ensures two decimal places
-  const stringValue = value.toFixed(2); 
+   // Convert to number safely
+   const numericValue = typeof value === 'number' ? value : Number(value);
+  const stringValue = numericValue.toFixed(2); 
   // Split into integer and decimal parts
   const [intValue, floatValue] = stringValue.split('.'); 
 
