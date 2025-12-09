@@ -1,16 +1,9 @@
-import { PrismaClient } from '@/lib/generated/prisma/client';
-import { PrismaPg } from '@prisma/adapter-pg'
+import { prisma } from '@/prisma';
 import sampleData from './sample-data';
 import 'dotenv/config'
 
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-})
 
-const prisma = new PrismaClient({
-  adapter,
-});
 
 async function main() {
   await prisma.product.deleteMany();

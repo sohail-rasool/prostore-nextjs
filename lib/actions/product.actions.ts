@@ -1,19 +1,11 @@
-import { PrismaClient } from "@/lib/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
 import { convertToPlainObject } from "../utils";
 import "dotenv/config";
-
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL,
-});
-
-const prisma = new PrismaClient({
-  adapter,
-});
+import { LATEST_PRODUCTS_LIMIT } from "../constants";
+import { prisma } from "@/prisma";
 
 export const fetchLatestProduct = async () => {
   const data = await prisma.product.findMany({
-    take: 4,
+    take: LATEST_PRODUCTS_LIMIT,
     orderBy: { createdAt: "desc" },
   });
   return convertToPlainObject(data);
@@ -21,7 +13,7 @@ export const fetchLatestProduct = async () => {
 
 // Get single product by slug
 export async function getProductBySlug(slug: string) {
-  const data =  await prisma.product.findFirst({
+  const data = await prisma.product.findFirst({
     where: { slug: slug },
   });
   return convertToPlainObject(data);
